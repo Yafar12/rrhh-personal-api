@@ -19,10 +19,10 @@ public final class EmployeePutController {
     }
 
     @PutMapping("/employee/{id}")
-    public ResponseEntity<String> execute(@PathVariable String id, @RequestBody
+    public ResponseEntity<Void> execute(@PathVariable String id, @RequestBody
                                           RequestEmployeeCreate
                                           request){
-        creator.create(request);
+        creator.create(request.withId(id));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
