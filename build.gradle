@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.5'
+    id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'gov.justucuman.personal-rrhh'
+version = '0.0.1-SNAPSHOT'
+description = 'personal-rrhh'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'net.datafaker:datafaker:2.4.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+sourceSets{
+    main{
+        java {srcDirs = ["src/main"]}
+        resources {srcDirs = ["src/main/resources"]}
+    }
+    test{
+        java {srcDirs = ["src/test"]}
+        resources {srcDirs = ["src/test/resources"]}
+
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
