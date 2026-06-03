@@ -1,6 +1,6 @@
 package gov.justucuman.personal_rrhh.employee.domain;
 
-import gov.justucuman.personal_rrhh.shared.domain.ValueObjectsMother;
+import gov.justucuman.personal_rrhh.shared.domain.EmployeeValueObjectMother;
 
 public abstract class EmployeeLegajoMother {
     public static EmployeeLegajo create(String value){
@@ -8,6 +8,6 @@ public abstract class EmployeeLegajoMother {
     }
 
     public static EmployeeLegajo random(){
-        return create(ValueObjectsMother.legajoRandom());
+        return create(EmployeeValueObjectMother.legajoRandom());
     }
 }

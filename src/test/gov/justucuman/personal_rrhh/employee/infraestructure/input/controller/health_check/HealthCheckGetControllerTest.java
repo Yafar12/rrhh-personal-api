@@ -1,6 +1,6 @@
 package gov.justucuman.personal_rrhh.employee.infraestructure.input.controller.health_check;
 
-import gov.justucuman.personal_rrhh.employee.infraestructure.input.controller.RequestTestCase;
+import gov.justucuman.personal_rrhh.shared.infraestructure.input.controller.RequestTestCase;
 import org.junit.jupiter.api.Test;
 
 

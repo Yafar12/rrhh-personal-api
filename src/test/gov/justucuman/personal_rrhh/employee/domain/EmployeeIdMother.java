@@ -1,6 +1,6 @@
 package gov.justucuman.personal_rrhh.employee.domain;
 
-import gov.justucuman.personal_rrhh.shared.domain.ValueObjectsMother;
+import gov.justucuman.personal_rrhh.shared.domain.UuidMother;
 
 public final class EmployeeIdMother {
     public static EmployeeId create(String value){
@@ -8,6 +8,6 @@ public final class EmployeeIdMother {
     }
 
     public static EmployeeId random(){
-        return create(ValueObjectsMother.uuidRandom());
+        return create(UuidMother.random());
     }
 }

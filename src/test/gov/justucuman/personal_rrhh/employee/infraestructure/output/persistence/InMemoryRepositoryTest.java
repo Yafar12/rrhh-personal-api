@@ -8,7 +8,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-final class InMemoryRepositoryTest extends InfraestructureUnitTestCase {
+final class InMemoryRepositoryTest extends InMemoryUnitTestCase {
     @Test
     void save_a_exist_employee(){
         Employee employee = EmployeeMother.random();

@@ -1,6 +1,6 @@
 package gov.justucuman.personal_rrhh.employee.domain;
 
-import gov.justucuman.personal_rrhh.shared.domain.ValueObjectsMother;
+import gov.justucuman.personal_rrhh.shared.domain.EmployeeValueObjectMother;
 
 public final class EmployeeStateMother {
 
@@ -13,6 +13,6 @@ public final class EmployeeStateMother {
     }
 
     public static EmployeeStateEnum random() {
-        return ValueObjectsMother.enumRandom(EmployeeStateEnum.class);
+        return EmployeeValueObjectMother.enumRandom(EmployeeStateEnum.class);
     }
 }

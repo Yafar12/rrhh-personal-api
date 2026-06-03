@@ -1,44 +1,32 @@
 package gov.justucuman.personal_rrhh.employee.domain;
 
-import java.time.LocalDateTime;
+import gov.justucuman.personal_rrhh.person.domain.*;
+
+import java.time.LocalDate;
 import java.util.Objects;
 
 public final class Employee {
     private EmployeeId        id;
-    private EmployeeDni       dni;
     private EmployeeLegajo    legajo;
-    private EmployeeCuil      cuil;
-    private EmployeeGender    genderId;
-    private EmployeeName      name;
-    private EmployeeLastname  lastname;
-    private EmployeePhone     phone;
     private EmployeeStateEnum employeeState;
-    private EmployeeAddress   address;
-    private LocalDateTime     bornDate;
-    private Photo             photoPath;
+    private LocalDate entryDate;
+    private Photo photoPath;
+
+
+    public LocalDate getEntryDate() {
+        return entryDate;
+    }
 
     public Employee(
             EmployeeId id,
-            EmployeeDni dni,
             EmployeeLegajo legajo,
-            EmployeeCuil cuil,
-            EmployeeGender genderId,
-            EmployeeName name,
-            EmployeeLastname lastname,
-            EmployeePhone phone,
-            EmployeeStateEnum employeeState,
-            EmployeeAddress address
+            LocalDate entryDate,
+            EmployeeStateEnum employeeState
     ) {
         this.id = id;
-        this.dni = dni;
         this.legajo = legajo;
-        this.cuil = cuil;
-        this.genderId = genderId;
-        this.name = name;
-        this.lastname = lastname;
-        this.phone = phone;
         this.employeeState = employeeState;
-        this.address = address;
+        this.entryDate = entryDate;
     }
 
     public EmployeeId getId() {
@@ -49,40 +37,8 @@ public final class Employee {
         return legajo;
     }
 
-    public EmployeeLastname getLastname() {
-        return lastname;
-    }
-
-    public EmployeeName getName() {
-        return name;
-    }
-
-    public EmployeeDni getDni() {
-        return dni;
-    }
-
-    public EmployeeCuil getCuil() {
-        return cuil;
-    }
-
-    public LocalDateTime getBornDate() {
-        return bornDate;
-    }
-
-    public EmployeeGender getGenderId() {
-        return genderId;
-    }
-
     public EmployeeStateEnum getEmployeeState() {
         return employeeState;
-    }
-
-    public EmployeePhone getPhone() {
-        return phone;
-    }
-
-    public EmployeeAddress getAddress() {
-        return address;
     }
 
     public Photo getPhotoPath() {
@@ -101,31 +57,7 @@ public final class Employee {
         ) && Objects.equals(
                 legajo,
                 employee.legajo
-        ) && Objects.equals(
-                lastname,
-                employee.lastname
-        ) && Objects.equals(
-                name,
-                employee.name
-        ) && Objects.equals(
-                dni,
-                employee.dni
-        ) && Objects.equals(
-                cuil,
-                employee.cuil
-        ) && Objects.equals(
-                bornDate,
-                employee.bornDate
-        ) && Objects.equals(
-                genderId,
-                employee.genderId
         ) && employeeState == employee.employeeState && Objects.equals(
-                phone,
-                employee.phone
-        ) && Objects.equals(
-                address,
-                employee.address
-        ) && Objects.equals(
                 photoPath,
                 employee.photoPath
         );
@@ -136,15 +68,7 @@ public final class Employee {
         return Objects.hash(
                 id,
                 legajo,
-                lastname,
-                name,
-                dni,
-                cuil,
-                bornDate,
-                genderId,
                 employeeState,
-                phone,
-                address,
                 photoPath
         );
     }
