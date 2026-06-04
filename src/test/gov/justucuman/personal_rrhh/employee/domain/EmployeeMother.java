@@ -1,7 +1,6 @@
 package gov.justucuman.personal_rrhh.employee.domain;
 
-import gov.justucuman.personal_rrhh.employee.application.create.RequestEmployeeCreate;
-import gov.justucuman.personal_rrhh.person.domain.*;
+import gov.justucuman.personal_rrhh.employee.application.create.EmployeeCreateCommand;
 
 import java.time.LocalDate;
 
@@ -10,22 +9,25 @@ public final class EmployeeMother {
             EmployeeId id,
             EmployeeLegajo legajo,
             LocalDate entryDate,
+            EmployeePersonId personId,
             EmployeeStateEnum state
     ) {
         return new Employee(
                 id,
                 legajo,
                 entryDate,
+                personId,
                 state
         );
     }
 
-    public static Employee fromRequest(RequestEmployeeCreate request) {
+    public static Employee fromCommand(EmployeeCreateCommand command) {
         return new Employee(
-                EmployeeIdMother.create(request.id()),
-                EmployeeLegajoMother.create(request.legajo()),
+                new EmployeeId(command.id()),
+                new EmployeeLegajo(command.legajo()),
                 LocalDate.now(),
-                EmployeeStateMother.createFromCode(request.state())
+                new EmployeePersonId(command.personId()),
+                EmployeeStateEnum.fromValue(command.state())
         );
     }
 
@@ -34,6 +36,7 @@ public final class EmployeeMother {
                 EmployeeIdMother.random(),
                 EmployeeLegajoMother.random(),
                 LocalDate.now(),
+                EmployeePersonIdMother.random(),
                 EmployeeStateMother.random()
         );
     }

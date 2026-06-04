@@ -4,5 +4,5 @@ import java.util.Optional;
 
 public interface PersonRepository {
     void save(Person person);
-    Optional<Person> searchById(String id);
+    Optional<Person> search(String id);
 }

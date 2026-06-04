@@ -1,7 +1,5 @@
 package gov.justucuman.personal_rrhh.person.domain;
 
-import gov.justucuman.personal_rrhh.person.application.PersonCreateRequest;
-
 public final class PersonMother {
     public static Person create(
             PersonId id,

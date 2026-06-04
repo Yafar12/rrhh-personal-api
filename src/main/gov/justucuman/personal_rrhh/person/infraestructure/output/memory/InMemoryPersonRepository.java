@@ -1,4 +1,4 @@
-package gov.justucuman.personal_rrhh.person.infraestructure.output.persistence;
+package gov.justucuman.personal_rrhh.person.infraestructure.output.memory;
 
 import gov.justucuman.personal_rrhh.person.domain.Person;
 import gov.justucuman.personal_rrhh.person.domain.PersonRepository;
@@ -18,7 +18,7 @@ public final class InMemoryPersonRepository implements PersonRepository {
     }
 
     @Override
-    public Optional<Person> searchById(String id){
+    public Optional<Person> search(String id){
         return Optional.ofNullable(people.get(id));
     }
 }

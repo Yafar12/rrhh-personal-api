@@ -10,6 +10,7 @@ public final class Employee {
     private EmployeeLegajo    legajo;
     private EmployeeStateEnum employeeState;
     private LocalDate entryDate;
+    private EmployeePersonId personId;
     private Photo photoPath;
 
 
@@ -21,12 +22,14 @@ public final class Employee {
             EmployeeId id,
             EmployeeLegajo legajo,
             LocalDate entryDate,
+            EmployeePersonId personId,
             EmployeeStateEnum employeeState
     ) {
         this.id = id;
         this.legajo = legajo;
         this.employeeState = employeeState;
         this.entryDate = entryDate;
+        this.personId = personId;
     }
 
     public EmployeeId getId() {
@@ -45,6 +48,9 @@ public final class Employee {
         return photoPath;
     }
 
+    public EmployeePersonId getPersonId(){
+        return personId;
+    }
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) {

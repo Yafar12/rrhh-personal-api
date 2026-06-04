@@ -3,7 +3,7 @@ package gov.justucuman.personal_rrhh.shared.domain;
 import java.util.Objects;
 
 public abstract class StringValueObject {
-    private String value;
+    private final String value;
 
     public StringValueObject(String value){
         this.value = value;

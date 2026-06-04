@@ -22,6 +22,6 @@ public enum EmployeeStateEnum {
                 return state;
             }
         }
-        throw new IllegalArgumentException("Estado de empleado no válido: " + value);
+        throw new IllegalArgumentException(value + ": No es un tipo de estado valido para el empleado");
     }
 }

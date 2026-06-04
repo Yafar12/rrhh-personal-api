@@ -8,9 +8,9 @@ final class EmployeePutControllerTest extends RequestTestCase {
 
     String body = """
                   {
-                  "id": "550e8400-e29b-41d4-a716-446655440000",
-                  "legajo": "54",
+                  "legajo": "LEG-1234",
                   "state": "ACTIVO",
+                  "personId": "550e8400-e29b-41d4-a716-446655440000"
                   }
                   """;
 

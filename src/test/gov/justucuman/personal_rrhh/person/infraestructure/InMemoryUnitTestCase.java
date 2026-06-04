@@ -1,6 +1,6 @@
 package gov.justucuman.personal_rrhh.person.infraestructure;
 
-import gov.justucuman.personal_rrhh.person.infraestructure.output.persistence.InMemoryPersonRepository;
+import gov.justucuman.personal_rrhh.person.infraestructure.output.memory.InMemoryPersonRepository;
 import org.junit.jupiter.api.BeforeEach;
 
 public abstract class InMemoryUnitTestCase {

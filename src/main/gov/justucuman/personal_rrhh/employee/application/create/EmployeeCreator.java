@@ -14,13 +14,14 @@ public final class EmployeeCreator {
         this.repository = repository;
     }
 
-    public void create(RequestEmployeeCreate request) {
+    public void create(EmployeeCreateCommand command) {
 
         Employee employee = new Employee(
-                new EmployeeId(request.id()),
-                new EmployeeLegajo(request.legajo()),
+                new EmployeeId(command.id()),
+                new EmployeeLegajo(command.legajo()),
                 LocalDate.now(),
-                EmployeeStateEnum.fromValue(request.state())
+                new EmployeePersonId(command.personId()),
+                EmployeeStateEnum.fromValue(command.state())
         );
 
         repository.save(employee);

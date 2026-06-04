@@ -1,6 +1,5 @@
 package gov.justucuman.personal_rrhh.person.application.create;
 
-import gov.justucuman.personal_rrhh.person.application.PersonCreateRequest;
 import gov.justucuman.personal_rrhh.person.domain.*;
 
 import java.time.LocalDate;

@@ -3,7 +3,7 @@ package gov.justucuman.personal_rrhh.shared.domain;
 import java.util.Objects;
 
 public abstract class IntegerValueObject {
-    private Integer value;
+    private final Integer value;
 
     public IntegerValueObject(Integer value){
         this.value = value;

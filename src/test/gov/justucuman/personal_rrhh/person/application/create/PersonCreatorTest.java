@@ -1,9 +1,5 @@
 package gov.justucuman.personal_rrhh.person.application.create;
 
-import gov.justucuman.personal_rrhh.employee.application.create.EmployeeCreator;
-import gov.justucuman.personal_rrhh.employee.domain.EmployeeRepository;
-import gov.justucuman.personal_rrhh.person.application.PersonCreateRequest;
-import gov.justucuman.personal_rrhh.person.application.PersonCreator;
 import gov.justucuman.personal_rrhh.person.domain.Person;
 import gov.justucuman.personal_rrhh.person.domain.PersonMother;
 import gov.justucuman.personal_rrhh.person.domain.PersonRepository;

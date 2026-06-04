@@ -1,7 +1,7 @@
 package gov.justucuman.personal_rrhh.employee.application;
 
+import gov.justucuman.personal_rrhh.employee.application.create.EmployeeCreateCommand;
 import gov.justucuman.personal_rrhh.employee.application.create.EmployeeCreator;
-import gov.justucuman.personal_rrhh.employee.application.create.RequestEmployeeCreate;
 import gov.justucuman.personal_rrhh.employee.domain.Employee;
 import gov.justucuman.personal_rrhh.employee.domain.EmployeeMother;
 import gov.justucuman.personal_rrhh.employee.domain.EmployeeRepository;
@@ -11,16 +11,19 @@ import static org.mockito.Mockito.*;
 
 final class EmployeeCreatorTest {
     @Test
-    void save_a_valid_employee(){
+    void save_a_valid_employee() {
         EmployeeRepository repository = mock(EmployeeRepository.class);
-        EmployeeCreator creator = new EmployeeCreator(repository);
+        EmployeeCreator    creator    = new EmployeeCreator(repository);
 
-        RequestEmployeeCreate request = RequestEmployeeCreateMother.random();
+        EmployeeCreateCommand command = EmployeeCreateCommandMother.random();
 
-        Employee        employee = EmployeeMother.fromRequest(request);
+        Employee employee = EmployeeMother.fromCommand(command);
 
-        creator.create(request);
+        creator.create(command);
 
-        verify(repository,times(1)).save(employee);
+        verify(
+                repository,
+                times(1)
+        ).save(employee);
     }
 }
