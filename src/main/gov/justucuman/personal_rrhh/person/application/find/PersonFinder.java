@@ -18,7 +18,7 @@ public final class PersonFinder {
                 person.getCuil().value(),
                 person.getName().value(),
                 person.getLastname().value(),
-                person.getBornDate().value().toString(),
+                person.getBornDate().value(),
                 person.getGenderId().value(),
                 person.getAddress().streetName(),
                 person.getAddress().streetNumber(),

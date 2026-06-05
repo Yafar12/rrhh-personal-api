@@ -3,25 +3,26 @@ package gov.justucuman.personal_rrhh.employee.domain;
 import gov.justucuman.personal_rrhh.person.domain.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public final class Employee {
     private EmployeeId        id;
     private EmployeeLegajo    legajo;
     private EmployeeStateEnum employeeState;
-    private LocalDate entryDate;
-    private EmployeePersonId personId;
+    private LocalDateTime     entryDate;
+    private EmployeePersonId  personId;
     private Photo photoPath;
 
 
-    public LocalDate getEntryDate() {
+    public LocalDateTime getEntryDate() {
         return entryDate;
     }
 
     public Employee(
             EmployeeId id,
             EmployeeLegajo legajo,
-            LocalDate entryDate,
+            LocalDateTime entryDate,
             EmployeePersonId personId,
             EmployeeStateEnum employeeState
     ) {
@@ -51,6 +52,7 @@ public final class Employee {
     public EmployeePersonId getPersonId(){
         return personId;
     }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) {

@@ -4,18 +4,20 @@ import java.time.LocalDate;
 import java.time.Period;
 
 public abstract class LocalDateValueObject {
-    private final LocalDate value;
+    private final String value;
 
-    public LocalDateValueObject(LocalDate value) {
+    public LocalDateValueObject(String value) {
         ensureIsValidBornDate(value);
         this.value = value;
     }
 
-    public LocalDate value(){
+    public String value(){
         return value;
     }
 
-    private void ensureIsValidBornDate(LocalDate date) {
+    private void ensureIsValidBornDate(String value) {
+        LocalDate date = LocalDate.parse(value);
+
         if (date == null) {
             throw new IllegalArgumentException("La fecha de nacimiento es obligatoria.");
         }

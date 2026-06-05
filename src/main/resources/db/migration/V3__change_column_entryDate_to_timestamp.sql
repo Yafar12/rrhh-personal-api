@@ -1,1 +1,0 @@
-ALTER TABLE rrhh.employee ALTER COLUMN entry_date TYPE TIMESTAMP;

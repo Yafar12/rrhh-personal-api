@@ -5,7 +5,7 @@ import gov.justucuman.personal_rrhh.shared.domain.LocalDateValueObject;
 import java.time.LocalDate;
 
 public final class PersonBornDate extends LocalDateValueObject {
-    public PersonBornDate(LocalDate value) {
+    public PersonBornDate(String value) {
         super(value);
     }
 }

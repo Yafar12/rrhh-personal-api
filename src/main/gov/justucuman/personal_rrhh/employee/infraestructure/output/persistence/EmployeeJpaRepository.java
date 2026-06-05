@@ -4,4 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-public interface EmployeeJpaRepository extends JpaRepository<EmployeeEntity,UUID> {}
+public interface EmployeeJpaRepository extends JpaRepository<EmployeeEntity,UUID> {
+    Boolean existsByLegajoAndIdNot(String legajo,UUID id);
+}

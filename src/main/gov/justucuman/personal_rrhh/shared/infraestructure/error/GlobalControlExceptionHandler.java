@@ -1,6 +1,10 @@
 package gov.justucuman.personal_rrhh.shared.infraestructure.error;
 
 import gov.justucuman.personal_rrhh.employee.application.find.EmployeeNotFoundException;
+import gov.justucuman.personal_rrhh.person.application.exception.PersonCuilDuplicateException;
+import gov.justucuman.personal_rrhh.person.application.exception.PersonDniDuplicateException;
+import gov.justucuman.personal_rrhh.person.application.exception.PersonPhoneDuplicateException;
+import gov.justucuman.personal_rrhh.shared.application.DuplicateException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -54,6 +58,22 @@ public final class GlobalControlExceptionHandler {
                                                        .contains("uuid")) {
             field = "personId";
         }
+        else if (message.toLowerCase().contains("dni")) {
+            field = "dni";
+        }
+        else if (message.toLowerCase().contains("cuil")) {
+            field = "cuil";
+        }
+        else if (message.toLowerCase()
+                        .contains("telefono") || message.toLowerCase()
+                                                        .contains("phone")) {
+            field = "phone";
+        }
+        else if (message.toLowerCase()
+                        .contains("calle") || message.toLowerCase()
+                                                     .contains("numero")) {
+            field = "streetNumber";
+        }
 
         fields.put(
                 field,
@@ -82,6 +102,18 @@ public final class GlobalControlExceptionHandler {
         );
     }
 
+    @ExceptionHandler(DuplicateException.class)
+    public ResponseEntity<HttpErrorResponse> handleDuplicateErrors(DuplicateException ex) {
+        Map<String, String> fields = new HashMap<>();
+
+        fields.put(ex.field(), ex.toString());
+
+        return new ResponseEntity<>(
+                responseWithBody(409, "Conflict Errors", fields),
+                HttpStatus.CONFLICT
+        );
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<HttpErrorResponse> handleUnexpectedErrors(Exception ex) {
         Map<String, String> fields = new HashMap<>();
@@ -105,7 +137,7 @@ public final class GlobalControlExceptionHandler {
             String message,
             Map<String, String> fields
     ) {
-        Integer status       = statusCode == null ? 400 : statusCode;
+        Integer status = statusCode == null ? 400 : statusCode;
         String  messageError = message == null || message.isBlank() ? "Error" : message;
 
         return new HttpErrorResponse(

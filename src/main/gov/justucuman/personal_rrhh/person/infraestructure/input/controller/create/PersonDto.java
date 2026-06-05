@@ -14,7 +14,7 @@ public record PersonDto(
         String dni,
 
         @NotBlank(message = "El CUIL es obligatorio")
-        @Pattern(regexp = "^\\d{2}-\\d{8}-\\d{1}$", message = "El CUIL debe tener el formato XX-XXXXXXXX-X")
+        @Pattern(regexp = "^\\d{2}-\\d{8}-\\d{1}$", message = "El CUIL debe contener exactamente 11 digitos con formato XX-XXXXXXXX-X")
         String cuil,
 
         @NotBlank(message = "El nombre es obligatorio")

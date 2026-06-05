@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -32,7 +33,7 @@ public class PersonPostgresRepository implements PersonRepository {
                 person.getName().value(),
                 person.getLastname().value(),
                 person.getPhone().value(),
-                person.getBornDate().value()
+                LocalDate.parse(person.getBornDate().value())
         );
         jpaRepository.save(entity);
     }
@@ -56,8 +57,20 @@ public class PersonPostgresRepository implements PersonRepository {
                                             new LocalityId(entity.getLocalityId()
                                                                  .toString())
                                     ),
-                                    new PersonBornDate(entity.getBornDate()),
+                                    new PersonBornDate(entity.getBornDate().toString()),
                                     new PersonPhone(entity.getPhone())
                             ));
+    }
+
+    public Boolean existsByDniAndIdNot(String dni,String id){
+        return jpaRepository.existsByDniAndIdNot(dni,UUID.fromString(id));
+    }
+
+    public Boolean existsByPhoneAndIdNot(String phone,String id){
+        return jpaRepository.existsByPhoneAndIdNot(phone,UUID.fromString(id));
+    }
+
+    public Boolean existsByCuilAndIdNot(String cuil, String id){
+        return jpaRepository.existsByCuilAndIdNot(cuil,UUID.fromString(id));
     }
 }

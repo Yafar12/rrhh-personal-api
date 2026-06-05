@@ -23,7 +23,7 @@ public class EmployeePostgresRepository implements EmployeeRepository{
         EmployeeEntity entity = new EmployeeEntity(
                 UUID.fromString(employee.getId().value()),
                 employee.getLegajo().value(),
-                employee.getEntryDate().atStartOfDay(),
+                employee.getEntryDate(),
                 UUID.fromString(employee.getPersonId().value()),
                 employee.getEmployeeState().code(),
                 employee.getPhotoPath() != null ? employee.getPhotoPath().value() : null
@@ -37,9 +37,13 @@ public class EmployeePostgresRepository implements EmployeeRepository{
                             .map(entity -> new Employee(
                                     new EmployeeId(entity.getId().toString()),
                                     new EmployeeLegajo(entity.getLegajo()),
-                                    entity.getEntryDate().toLocalDate(),
+                                    entity.getEntryDate(),
                                     new EmployeePersonId(entity.getPersonId().toString()),
                                     EmployeeStateEnum.fromValue(entity.getEmployeeState())
                             ));
+    }
+
+    public Boolean existsByLegajoAndIdNot(String legajo,String id){
+        return jpaRepository.existsByLegajoAndIdNot(legajo,UUID.fromString(id));
     }
 }
