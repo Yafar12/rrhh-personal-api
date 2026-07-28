@@ -1,10 +1,8 @@
 package gov.justucuman.personal_rrhh.shared.infraestructure.error;
 
-import gov.justucuman.personal_rrhh.employee.application.find.EmployeeNotFoundException;
-import gov.justucuman.personal_rrhh.person.application.exception.PersonCuilDuplicateException;
-import gov.justucuman.personal_rrhh.person.application.exception.PersonDniDuplicateException;
-import gov.justucuman.personal_rrhh.person.application.exception.PersonPhoneDuplicateException;
+import gov.justucuman.personal_rrhh.employee.application.exception.EmployeeNotFoundException;
 import gov.justucuman.personal_rrhh.shared.application.DuplicateException;
+import gov.justucuman.personal_rrhh.shared.application.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -18,26 +16,17 @@ import java.util.Map;
 
 @RestControllerAdvice
 public final class GlobalControlExceptionHandler {
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<HttpErrorResponse> handleValidationErrors(MethodArgumentNotValidException err) {
         Map<String, String> fields = new HashMap<>();
 
-        for (FieldError error : err.getBindingResult().getFieldErrors()) {
-            fields.put(
-                    error.getField(),
-                    error.getDefaultMessage()
-            );
+        for (FieldError error : err.getBindingResult()
+                                   .getFieldErrors()) {
+            fields.put(error.getField(), error.getDefaultMessage());
         }
 
-        return new ResponseEntity<>(
-                responseWithBody(
-                        err.getStatusCode().value(),
-                        "Validation Errors",
-                        fields
-                ),
-                HttpStatus.BAD_REQUEST
-        );
+        return new ResponseEntity<>(responseWithBody(err.getStatusCode()
+                                                        .value(), "Validation Errors", fields), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
@@ -47,10 +36,12 @@ public final class GlobalControlExceptionHandler {
         String message = ex.getMessage();
         String field   = "error";
 
-        if (message.toLowerCase().contains("legajo")) {
+        if (message.toLowerCase()
+                   .contains("legajo")) {
             field = "legajo";
         }
-        else if (message.toLowerCase().contains("estado")) {
+        else if (message.toLowerCase()
+                        .contains("estado")) {
             field = "state";
         }
         else if (message.toLowerCase()
@@ -58,10 +49,12 @@ public final class GlobalControlExceptionHandler {
                                                        .contains("uuid")) {
             field = "personId";
         }
-        else if (message.toLowerCase().contains("dni")) {
+        else if (message.toLowerCase()
+                        .contains("dni")) {
             field = "dni";
         }
-        else if (message.toLowerCase().contains("cuil")) {
+        else if (message.toLowerCase()
+                        .contains("cuil")) {
             field = "cuil";
         }
         else if (message.toLowerCase()
@@ -75,31 +68,15 @@ public final class GlobalControlExceptionHandler {
             field = "streetNumber";
         }
 
-        fields.put(
-                field,
-                message
-        );
-        return new ResponseEntity<>(
-                responseWithBody(
-                        400,
-                        "Domain Validation Errors",
-                        fields
-                ),
-                HttpStatus.BAD_REQUEST
-        );
+        fields.put(field, message);
+        return new ResponseEntity<>(responseWithBody(400, "Domain Validation Errors", fields), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(EmployeeNotFoundException.class)
+    @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<HttpErrorResponse> handleEmployeeNotFoundException(EmployeeNotFoundException ex) {
 
-
-        return new ResponseEntity<>(
-                responseWithoutBody(
-                        HttpStatus.BAD_REQUEST.value(),
-                        ex.getMessage()
-                ),
-                HttpStatus.BAD_REQUEST
-        );
+        return new ResponseEntity<>(responseWithoutBody(HttpStatus.NOT_FOUND.value(), ex.toString()),
+                                    HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(DuplicateException.class)
@@ -108,55 +85,30 @@ public final class GlobalControlExceptionHandler {
 
         fields.put(ex.field(), ex.toString());
 
-        return new ResponseEntity<>(
-                responseWithBody(409, "Conflict Errors", fields),
-                HttpStatus.CONFLICT
-        );
+        return new ResponseEntity<>(responseWithBody(409, "Conflict Errors", fields), HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<HttpErrorResponse> handleUnexpectedErrors(Exception ex) {
         Map<String, String> fields = new HashMap<>();
-        fields.put(
-                "server",
-                ex.getMessage()
-        );
+        fields.put("server", ex.getMessage());
 
-        return new ResponseEntity<>(
-                responseWithBody(
-                        500,
-                        "Internal Server Error",
-                        fields
-                ),
-                HttpStatus.INTERNAL_SERVER_ERROR
-        );
+        return new ResponseEntity<>(responseWithBody(500, "Internal Server Error", fields),
+                                    HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    private HttpErrorResponse responseWithBody(
-            Integer statusCode,
-            String message,
-            Map<String, String> fields
-    ) {
-        Integer status = statusCode == null ? 400 : statusCode;
-        String  messageError = message == null || message.isBlank() ? "Error" : message;
+    private HttpErrorResponse responseWithBody(Integer statusCode, String message, Map<String, String> fields) {
+        Integer status = statusCode == null
+                ? 400
+                : statusCode;
+        String messageError = message == null || message.isBlank()
+                ? "Error"
+                : message;
 
-        return new HttpErrorResponse(
-                LocalDateTime.now(),
-                status,
-                messageError,
-                fields
-        );
+        return new HttpErrorResponse(LocalDateTime.now(), status, messageError, fields);
     }
 
-    private HttpErrorResponse responseWithoutBody(
-            Integer statusCode,
-            String message
-    ) {
-        return new HttpErrorResponse(
-                LocalDateTime.now(),
-                statusCode,
-                message,
-                null
-        );
+    private HttpErrorResponse responseWithoutBody(Integer statusCode, String message) {
+        return new HttpErrorResponse(LocalDateTime.now(), statusCode, message, null);
     }
 }
